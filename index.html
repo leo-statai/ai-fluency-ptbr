@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Framework Interativo para Fluência em IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Academic Calm -->
+    <!-- Application Structure Plan: A thematic, single-page scrolling application. It starts with a high-level introduction, then moves to interactive sections for the 3 Modalities (tab-based interaction) and the 4 Core Competencies (a grid of clickable cards updating a detail view and a custom interactive diagram). This structure was chosen to transform a dense document into an engaging, explorable experience, guiding the user from general concepts to specific details in a non-linear, intuitive way, which is superior to a simple static page for learning and retention. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: 3 Modalities. Goal: Organize/Inform. Viz: Tab-like buttons. Interaction: Click to show/hide content. Justification: Intuitive UI for comparing distinct categories. Library: Vanilla JS.
+        - Report Info: 4 Competencies. Goal: Organize/Relate/Inform. Viz: Interactive grid + detail view + Custom HTML/CSS Diagram. Interaction: Click grid or diagram node to update detail view and sync UI. The diagram provides a visual metaphor for interconnectedness. Justification: Breaks down complex info and visually represents the core idea of balanced, interconnected skills. Library: Vanilla JS & CSS.
+        - Report Info: Framework Advantages. Goal: Inform. Viz: Icon-driven grid. Interaction: Hover effects. Justification: Quick, scannable summary of key benefits. Library: HTML/CSS.
+        - All choices adhere to the NO SVG/Mermaid constraint. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+        }
+        .active-tab {
+            background-color: #4f46e5 !important;
+            color: white !important;
+        }
+        .competency-card.active-competency, .diagram-node.active-competency .node-content {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            border-color: #4f46e5;
+        }
+        #competency-diagram .diagram-node {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        #competency-diagram .node-content {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8px;
+            font-size: 14px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        #competency-diagram .diagram-node:hover .node-content {
+            transform: scale(1.05);
+            border-color: #6366f1;
+        }
+        /* Connecting lines */
+        #competency-diagram .diagram-node::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            background: #e2e8f0;
+            z-index: -1;
+            transform-origin: top left;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-indigo-600">Fluência em IA</h1>
+            <div class="hidden md:flex space-x-6">
+                <a href="#framework" class="text-slate-600 hover:text-indigo-600">O Framework</a>
+                <a href="#modalities" class="text-slate-600 hover:text-indigo-600">Modalidades</a>
+                <a href="#competencies" class="text-slate-600 hover:text-indigo-600">Competências</a>
+                <a href="#about" class="text-slate-600 hover:text-indigo-600">Sobre</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section id="framework" class="text-center mb-24">
+            <h2 class="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Explore o Framework para Fluência em IA</h2>
+            <p class="max-w-3xl mx-auto text-lg text-slate-600 mb-8">
+                Uma ferramenta prática para entender como interagir de forma eficaz, ética e segura com a Inteligência Artificial no trabalho criativo, na inovação e na resolução de problemas.
+            </p>
+            <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-r-lg max-w-3xl mx-auto text-left">
+                <h3 class="font-bold text-indigo-800 mb-2">O que é Fluência em IA?</h3>
+                <p class="text-indigo-700">
+                    Definimos Fluência em IA como a capacidade de trabalhar de forma eficaz, eficiente, ética e segura dentro das modalidades emergentes de interação Humano-IA. O framework reconhece a IA como um parceiro de pensamento para realizar trabalhos cognitivos significativos.
+                </p>
+            </div>
+        </section>
+
+        <section id="modalities" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-800">As 3 Modalidades de Interação</h2>
+                <p class="max-w-2xl mx-auto text-md text-slate-600 mt-2">
+                    O framework identifica três formas principais de interação entre humanos e IA. Cada uma serve a um propósito diferente no fluxo de trabalho. Clique em cada modalidade para saber mais.
+                </p>
+            </div>
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="w-full md:w-1/3">
+                    <div id="modality-tabs" class="flex md:flex-col gap-2">
+                        <button data-target="automation" class="modality-tab w-full text-left p-4 rounded-lg bg-white shadow-sm hover:bg-indigo-100 transition-all active-tab">
+                            <h3 class="font-bold text-lg">1. Automação</h3>
+                            <p class="text-sm">IA realiza tarefas definidas por humanos.</p>
+                        </button>
+                        <button data-target="augmentation" class="modality-tab w-full text-left p-4 rounded-lg bg-white shadow-sm hover:bg-indigo-100 transition-all">
+                            <h3 class="font-bold text-lg">2. Aumento</h3>
+                            <p class="text-sm">IA e humano colaboram na tarefa.</p>
+                        </button>
+                        <button data-target="agency" class="modality-tab w-full text-left p-4 rounded-lg bg-white shadow-sm hover:bg-indigo-100 transition-all">
+                            <h3 class="font-bold text-lg">3. Agência</h3>
+                            <p class="text-sm">IA realiza tarefas de forma independente.</p>
+                        </button>
+                    </div>
+                </div>
+                <div class="w-full md:w-2/3 bg-white p-8 rounded-lg shadow-lg">
+                    <div id="modality-content">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="competencies" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-800">As 4 Competências Centrais ("Os 4 Ds")</h2>
+                 <p class="max-w-2xl mx-auto text-md text-slate-600 mt-2">
+                    Estas são as habilidades, conhecimentos e valores humanos que permitem uma interação Humano-IA eficaz. Elas são interconectadas e essenciais para a fluência. Clique em uma competência para ver os detalhes.
+                </p>
+            </div>
+            <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
+                <div>
+                    <div id="competency-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    </div>
+                    <div id="competency-details" class="bg-white p-6 rounded-lg shadow-lg min-h-[200px]">
+                    </div>
+                </div>
+                <div class="mt-16 lg:mt-0 flex flex-col items-center justify-center">
+                    <div id="competency-diagram" class="relative w-80 h-80 md:w-96 md:h-96">
+                        <div class="absolute inset-0 flex items-center justify-center -z-10">
+                            <div class="w-3/4 h-3/4 bg-slate-100 rounded-full"></div>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-32 h-32 bg-indigo-600 rounded-full flex items-center justify-center text-center text-white font-bold p-4 shadow-xl">Fluência em IA</div>
+                        </div>
+                    </div>
+                    <p class="text-center text-sm text-slate-500 mt-8">Diagrama interativo ilustrando a interconexão das competências. Clique em um pilar.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="bg-white p-8 rounded-lg shadow-lg">
+            <div class="text-center mb-8">
+                 <h2 class="text-3xl font-bold text-slate-800">Sobre o Framework</h2>
+                 <p class="max-w-2xl mx-auto text-md text-slate-600 mt-2">
+                    O framework foi projetado para ser uma ferramenta duradoura e fundamentalmente ética para navegar na era da IA.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 mb-12 text-center">
+                <div class="p-4">
+                    <div class="text-4xl mb-2">🔄</div>
+                    <h3 class="font-bold text-lg mb-2">Agnóstico de Plataforma</h3>
+                    <p class="text-slate-600">Independente de ferramentas específicas, adaptando-se a tecnologias emergentes.</p>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl mb-2">🎨</div>
+                    <h3 class="font-bold text-lg mb-2">Contextual e Flexível</h3>
+                    <p class="text-slate-600">Caracteriza ações eficazes em vez de prescrever processos rígidos.</p>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl mb-2">⚖️</div>
+                    <h3 class="font-bold text-lg mb-2">Centrado em Ética</h3>
+                    <p class="text-slate-600">Considera o uso responsável e seguro da IA como fundamental.</p>
+                </div>
+            </div>
+             <div class="text-sm text-slate-500 border-t pt-6">
+                <p><strong>Autores:</strong> Rick Dakan (Ringling College of Art and Design) e Joseph Feller (Cork University Business School, University College Cork).</p>
+                <p><strong>Versão Original:</strong> 1.1 (13 de Janeiro de 2025). Este é um documento vivo.</p>
+                <p><strong>Tradução para PT-BR por:</strong> Leonardo Alves (13 de Julho de 2025).</p>
+                <p><strong>Licença:</strong> CC BY-NC-ND 4.0</p>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="text-center py-6 text-sm text-slate-500">
+        <p>Aplicação Interativa criada para demonstrar o Framework de Fluência em IA.</p>
+    </footer>
+
+    <script>
+        const appData = {
+            modalities: {
+                automation: {
+                    title: "Automação: IA como Ferramenta Executora",
+                    content: "A IA executa tarefas de forma independente com base em instruções humanas diretas. É ideal para melhorar a eficiência de tarefas repetitivas, demoradas ou que exigem muitos dados. Requer definição clara de tarefas e controle de qualidade.",
+                    examples: "<strong>Exemplos:</strong> Gerar resumos, rascunhar e-mails, criar postagens para redes sociais, escrever código básico."
+                },
+                augmentation: {
+                    title: "Aumento: IA como Parceiro Colaborativo",
+                    content: "IA e humano co-definem e co-executam tarefas de forma iterativa. O foco está em aprimorar a criatividade humana, não em substituí-la. A interação é dinâmica, com contribuições de ambos os lados.",
+                    examples: "<strong>Exemplos:</strong> Escrever histórias, ensaios e artigos de pesquisa; desenvolver tarefas complexas de codificação."
+                },
+                agency: {
+                    title: "Agência: IA como Agente Autônomo",
+                    content: "O humano configura a IA para realizar tarefas futuras de forma independente, definindo seu comportamento e características, em vez de uma tarefa específica. Requer uma compreensão sofisticada das capacidades e limitações da IA.",
+                    examples: "<strong>Exemplos:</strong> Criar personagens de jogos interativos, tutores virtuais, chatbots de atendimento."
+                }
+            },
+            competencies: {
+                delegation: {
+                    icon: "🎯",
+                    name: "Delegação",
+                    short: "Visão criativa e seleção de ferramentas.",
+                    definition: "A capacidade de identificar quando e como usar ferramentas e modalidades de IA de forma eficaz. Envolve compreender as capacidades e limitações das tecnologias e tomar decisões informadas sobre quando usar automação, aumento ou agência.",
+                    subcategories: [
+                        "<strong>Consciência de Objetivo e Tarefa:</strong> Analisar e desconstruir uma tarefa em componentes.",
+                        "<strong>Consciência de Plataforma:</strong> Compreender as capacidades e limitações das ferramentas de IA.",
+                        "<strong>Delegação de Tarefas:</strong> Equilibrar capacidades de IA e humanas para otimizar o fluxo de trabalho."
+                    ]
+                },
+                description: {
+                    icon: "✍️",
+                    name: "Descrição",
+                    short: "Comunicar a visão para a IA.",
+                    definition: "As habilidades necessárias para comunicar ideias, requisitos e restrições para sistemas de IA de forma eficaz. Envolve criar prompts claros, específicos e bem estruturados que guiam a IA para produzir os resultados desejados.",
+                    subcategories: [
+                        "<strong>Descrição do Produto:</strong> Articular claramente as características do resultado desejado.",
+                        "<strong>Descrição do Processo:</strong> Usar prompts de forma dialógica para colaboração iterativa.",
+                        "<strong>Descrição de Desempenho:</strong> Definir comportamentos futuros da IA para uma boa experiência do usuário."
+                    ]
+                },
+                discernment: {
+                    icon: "🧐",
+                    name: "Discernimento",
+                    short: "Avaliar a qualidade e o desempenho.",
+                    definition: "A capacidade de avaliar criticamente a qualidade e adequação dos resultados e comportamentos da IA. Envolve julgar se a produção da IA está alinhada com a visão criativa, os padrões de qualidade e os valores do projeto.",
+                    subcategories: [
+                        "<strong>Discernimento de Desempenho:</strong> Avaliar se os comportamentos da IA permitem experiências de usuário positivas e como melhorar os resultados."
+                    ]
+                },
+                diligence: {
+                    icon: "🛡️",
+                    name: "Diligência",
+                    short: "Garantir ética e responsabilidade.",
+                    definition: "O uso responsável da IA, incluindo considerações éticas, transparência sobre o uso da tecnologia e a assunção de responsabilidade pelos produtos finais. É garantir a qualidade, segurança e confiabilidade dos resultados.",
+                    subcategories: [
+                        "<strong>Diligência na Criação:</strong> Manter práticas éticas e legais, com consciência de vieses e impactos.",
+                        "<strong>Diligência na Transparência:</strong> Comunicar claramente o envolvimento da IA no processo criativo.",
+                        "<strong>Diligência na Implantação:</strong> Verificar fatos, testar precisão e assumir responsabilidade pelos resultados."
+                    ]
+                }
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const modalityTabsContainer = document.getElementById('modality-tabs');
+            const modalityContentContainer = document.getElementById('modality-content');
+            const competencyGridContainer = document.getElementById('competency-grid');
+            const competencyDetailsContainer = document.getElementById('competency-details');
+            const diagramContainer = document.getElementById('competency-diagram');
+
+            function displayModalityContent(key) {
+                const modality = appData.modalities[key];
+                modalityContentContainer.innerHTML = `
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">${modality.title}</h3>
+                    <p class="text-slate-600 mb-4">${modality.content}</p>
+                    <p class="text-sm text-slate-500 bg-slate-50 p-3 rounded-md">${modality.examples}</p>
+                `;
+            }
+
+            function displayCompetencyDetails(key) {
+                 const competency = appData.competencies[key];
+                 competencyDetailsContainer.innerHTML = `
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">${competency.icon} ${competency.name}</h3>
+                    <p class="text-slate-600 mb-4">${competency.definition}</p>
+                    <h4 class="font-semibold text-slate-700 mb-2">Subcategorias-chave:</h4>
+                    <ul class="list-disc list-inside space-y-1 text-sm text-slate-600">
+                        ${competency.subcategories.map(sc => `<li>${sc}</li>`).join('')}
+                    </ul>
+                 `;
+            }
+            
+            function createCompetencyGrid() {
+                Object.keys(appData.competencies).forEach(key => {
+                    const competency = appData.competencies[key];
+                    const card = document.createElement('div');
+                    card.className = 'competency-card bg-white p-4 rounded-lg shadow-sm border-2 border-transparent hover:border-indigo-300 cursor-pointer transition-all';
+                    card.dataset.target = key;
+                    card.innerHTML = `
+                        <div class="text-2xl mb-2">${competency.icon}</div>
+                        <h3 class="font-bold text-lg">${competency.name}</h3>
+                        <p class="text-sm text-slate-500">${competency.short}</p>
+                    `;
+                    competencyGridContainer.appendChild(card);
+                });
+            }
+
+            function createCompetencyDiagram() {
+                const competencies = Object.keys(appData.competencies);
+                const diagramSize = diagramContainer.offsetWidth;
+                const radius = diagramSize / 2 - 60;
+                const angleStep = 360 / competencies.length;
+
+                competencies.forEach((key, index) => {
+                    const competency = appData.competencies[key];
+                    const angle = angleStep * index - 90; 
+                    const x = (diagramSize / 2) + radius * Math.cos(angle * Math.PI / 180) - 60;
+                    const y = (diagramSize / 2) + radius * Math.sin(angle * Math.PI / 180) - 60;
+
+                    const node = document.createElement('div');
+                    node.className = 'diagram-node';
+                    node.dataset.target = key;
+                    node.style.transform = `translate(${x}px, ${y}px)`;
+                    node.innerHTML = `
+                        <div class="node-content">
+                            <div class="text-2xl">${competency.icon}</div>
+                            <div class="font-bold">${competency.name}</div>
+                        </div>`;
+                    diagramContainer.appendChild(node);
+                });
+            }
+
+            function setActiveCompetency(key) {
+                competencyGridContainer.querySelectorAll('.competency-card').forEach(c => c.classList.remove('active-competency'));
+                diagramContainer.querySelectorAll('.diagram-node').forEach(n => n.classList.remove('active-competency'));
+                
+                const card = competencyGridContainer.querySelector(`.competency-card[data-target="${key}"]`);
+                const node = diagramContainer.querySelector(`.diagram-node[data-target="${key}"]`);
+
+                if(card) card.classList.add('active-competency');
+                if(node) node.classList.add('active-competency');
+
+                displayCompetencyDetails(key);
+            }
+
+            modalityTabsContainer.addEventListener('click', (e) => {
+                const tab = e.target.closest('.modality-tab');
+                if (tab) {
+                    modalityTabsContainer.querySelectorAll('.modality-tab').forEach(t => t.classList.remove('active-tab'));
+                    tab.classList.add('active-tab');
+                    displayModalityContent(tab.dataset.target);
+                }
+            });
+
+            competencyGridContainer.addEventListener('click', (e) => {
+                const card = e.target.closest('.competency-card');
+                if (card) {
+                    setActiveCompetency(card.dataset.target);
+                }
+            });
+
+            diagramContainer.addEventListener('click', (e) => {
+                const node = e.target.closest('.diagram-node');
+                if(node) {
+                    setActiveCompetency(node.dataset.target);
+                }
+            });
+            
+            createCompetencyGrid();
+            createCompetencyDiagram();
+            displayModalityContent('automation');
+            setActiveCompetency('delegation');
+        });
+    </script>
+</body>
+</html>
+
