@@ -40,5 +40,10 @@ O projeto está organizado da seguinte forma:
 
 - **Autores Originais:** Rick Dakan (Ringling College of Art and Design) e Joseph Feller (Cork University Business School, University College Cork).
 
-**Tradução para Português-br** Leonardo Alves
+- **Tradução para Português-br** Leonardo Alves
+
+## Declaração de Diligência
+
+**Tradução para Português-br** 
+
 Este documento foi traduzido com o auxílio do modelo de linguagem Grok 3, desenvolvido pela xAI. Todo o conteúdo traduzido foi revisado e editado por humano para garantir precisão, clareza e fidelidade ao texto original.
