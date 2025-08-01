@@ -39,4 +39,6 @@ O projeto está organizado da seguinte forma:
 ## Créditos
 
 - **Autores Originais:** Rick Dakan (Ringling College of Art and Design) e Joseph Feller (Cork University Business School, University College Cork).
-- **Tradução PT-BR:** Leonardo Alves.
+
+**Tradução para Português-br** Leonardo Alves
+Este documento foi traduzido com o auxílio do modelo de linguagem Grok 3, desenvolvido pela xAI. Todo o conteúdo traduzido foi revisado e editado por humano para garantir precisão, clareza e fidelidade ao texto original.
