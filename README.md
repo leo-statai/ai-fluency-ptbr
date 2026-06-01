@@ -1,49 +1,52 @@
-# Framework para Fluência em IA (Tradução PT-BR)
+# AI Fluency Framework — Brazilian Portuguese
 
-Este repositório contém a tradução para o português do Brasil do documento **"A Framework for AI Fluency"** (Versão 1.1), de autoria de Rick Dakan e Joseph Feller. Além da tradução, foi desenvolvida uma página web interativa para facilitar a exploração e o entendimento dos conceitos apresentados.
+> Brazilian-Portuguese translation of **"A Framework for AI Fluency"** (Rick Dakan & Joseph Feller),
+> with an interactive single-page web companion built in **Tailwind CSS + Chart.js**.
 
-O objetivo do framework é fornecer uma ferramenta prática e duradoura para que indivíduos e organizações possam navegar no cenário da Inteligência Artificial, permitindo um trabalho mais eficaz, ético e seguro em colaboração com sistemas de IA.
+🌐 **[Live interactive site →](https://leo-statai.github.io/ai-fluency-ptbr/)**
 
-## Licença
+---
 
-O material original e esta tradução são distribuídos sob a licença **Creative Commons Atribuição-NãoComercial-SemDerivações 4.0 Internacional (CC BY-NC-ND 4.0)**.
+## Sobre o projeto
 
-Isso significa que você tem a liberdade de compartilhar (copiar e redistribuir o material em qualquer suporte ou formato), desde que siga as seguintes condições:
-- **Atribuição:** Você deve dar o crédito apropriado, prover um link para a licença e indicar se foram feitas alterações.
-- **NãoComercial:** Você não pode usar o material para fins comerciais.
-- **SemDerivações:** Se você remixar, transformar ou criar a partir do material, não poderá distribuir o material modificado.
+Este repositório traz para o português brasileiro o documento **"A Framework for AI Fluency"** (Versão 1.5) de Rick Dakan e Joseph Feller. Além da tradução em si — disponível em PDF e Markdown — o projeto inclui uma **página web interativa** que apresenta o framework de forma visual e explorável, transformando um texto denso em uma experiência de aprendizado dinâmica.
 
-## Estrutura do Repositório
+O framework oferece uma ferramenta prática para que indivíduos e organizações naveguem o cenário da Inteligência Artificial com mais eficácia, ética e segurança.
 
-O projeto está organizado da seguinte forma:
+## Conteúdo
 
-```
-/
-├── 📄 index.html
-│   └── Uma página web interativa e responsiva que apresenta o framework,
-│       suas modalidades e competências de forma visual e fácil de navegar.
-│
-├── 📄 Framework_for_AI_Fluency_V_1.5.pt-BR.markdown
-│   └── A tradução completa do framework no formato Markdown.
-│
-├── 📄 Framework_for_AI_Fluency_V_1.5.pt-BR.pdf
-│   └── A tradução completa do framework em um arquivo PDF.
-│
-├── 🖼️ figura1.png
-│   └── Imagem utilizada no documento do framework.
-│
-└── 📄 README.md
-    └── Este arquivo, com a descrição do projeto.
-```
+| Arquivo | Descrição |
+|---|---|
+| [`index.html`](index.html) · [demo ao vivo](https://leo-statai.github.io/ai-fluency-ptbr/) | Single-page application interativa com as 3 Modalidades de Interação e as 4 Competências Centrais ("Os 4 Ds") do framework |
+| [`Framework_for_AI_Fluency_V_1.5.pt-BR.pdf`](Framework_for_AI_Fluency_V_1.5.pt-BR.pdf) | Tradução completa em PDF |
+| [`Framework_for_AI_Fluency_V_1.5.pt-BR.markdown`](Framework_for_AI_Fluency_V_1.5.pt-BR.markdown) | Tradução completa em Markdown |
+| [`Framework_for_AI_Fluency_V_1.5.pdf`](Framework_for_AI_Fluency_V_1.5.pdf) | Original em inglês (referência) |
+
+## Página interativa
+
+Aplicação single-page que transforma o documento em uma experiência exploratória:
+
+- **3 Modalidades** apresentadas em tabs interativas
+- **4 Competências Centrais** em grid clicável com vista detalhada sincronizada
+- **Diagrama customizado** das competências (HTML/CSS, sem SVG/Mermaid)
+- Navegação suave entre seções, layout responsivo
+
+**Stack:** HTML5 · Tailwind CSS (CDN) · Vanilla JavaScript · Chart.js
+
+## Tradução
+
+Tradução realizada com auxílio do modelo **Grok 3** (xAI), com revisão e edição humana para garantir precisão, clareza e fidelidade ao original.
 
 ## Créditos
 
-- **Autores Originais:** Rick Dakan (Ringling College of Art and Design) e Joseph Feller (Cork University Business School, University College Cork).
+- **Autores originais:** Rick Dakan (Ringling College of Art and Design) · Joseph Feller (Cork University Business School, University College Cork)
+- **Tradução PT-BR e página interativa:** Leonardo Alves
 
-- **Tradução para Português-br** Leonardo Alves
+## Licença
 
-## Declaração de Diligência
+Material original e tradução distribuídos sob **Creative Commons Atribuição-NãoComercial-SemDerivações 4.0 Internacional** ([CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.pt-br)).
 
-**Tradução para Português-br** 
-
-Este documento foi traduzido com o auxílio do modelo de linguagem Grok 3, desenvolvido pela xAI. Todo o conteúdo traduzido foi revisado e editado por humano para garantir precisão, clareza e fidelidade ao texto original.
+Você pode compartilhar (copiar e redistribuir o material em qualquer suporte ou formato), desde que:
+- **Atribua** o crédito apropriado, indique a licença e sinalize alterações.
+- **Não use** o material para fins comerciais.
+- **Não distribua** versões modificadas do material.
